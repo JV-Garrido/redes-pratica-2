@@ -1,18 +1,9 @@
-//
-//  TCPClient.java
-//  Kurose & Ross
-//
-
 import java.io.*;
 import java.net.*;
 
 public class TCPClient {
 
 	public static void main (String args[]) throws Exception {
-		// throws Exception here because don't want to deal
-		// with errors in the rest of the code for simplicity.
-		// (note: NOT a good practice!)
-		// Connect to the server process running at localhost:9000
 		Socket s = new Socket("localhost", 9000);
 	    // The next 2 lines create a output stream we can
 		// write to.  (To write TO SERVER)
@@ -27,7 +18,8 @@ public class TCPClient {
         String sentence;  
         sentence = inFromUser.readLine();
         // keep repeating until an empty line is read.
-		while (sentence.compareTo("") != 0) {
+		//while (sentence.compareTo("") != 0) {
+		while (sentence.compareTo("tchau") != 0) {
            // Send a user input to server
            serverWriter.writeBytes(sentence +"\n");
 		   // Server should convert to upper case and reply.
@@ -38,7 +30,8 @@ public class TCPClient {
            sentence = inFromUser.readLine();
         }
 		// Send an empty line to server to end communication.
-		serverWriter.writeBytes("\n");
+		//serverWriter.writeBytes("\n");
+		serverWriter.writeBytes("tchau" + "\n");
 		//Close the socket
 		s.close();
 	}
